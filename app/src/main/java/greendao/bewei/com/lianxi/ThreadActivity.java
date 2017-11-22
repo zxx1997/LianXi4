@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
+import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 import greendao.bewei.com.lianxi.dao.DownloadUtil;
 
 public class ThreadActivity extends FragmentActivity {
@@ -23,11 +25,16 @@ public class ThreadActivity extends FragmentActivity {
     private TextView total;
     private int max;
     private DownloadUtil mDownloadUtil;
+
+    private JCVideoPlayerStandard play;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thread);
 
+        play=findViewById(R.id.play);
+        play.setUp(Environment.getExternalStorageDirectory()
+                .getAbsolutePath() + "/local"+"/adc.mp4",JCVideoPlayerStandard.SCREEN_LAYOUT_NORMAL,"视频标题");
 
         Intent intent = getIntent();
         String vedio = intent.getStringExtra("vedio");
@@ -85,5 +92,21 @@ public class ThreadActivity extends FragmentActivity {
 
 
 
+    }
+
+    //视频播放
+    @Override
+    public void onBackPressed() {
+        if(JCVideoPlayer.backPress()){
+            return;
+        }
+        super.onBackPressed();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JCVideoPlayer.releaseAllVideos();
+        JCVideoPlayer.clearSavedProgress(ThreadActivity.this,"");
     }
 }
