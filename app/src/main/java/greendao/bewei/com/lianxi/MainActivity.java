@@ -17,7 +17,7 @@ import greendao.bewei.com.lianxi.presenter.ShowPresenter;
 import greendao.bewei.com.lianxi.presenter.ShowPresenterSx;
 import greendao.bewei.com.lianxi.view.ShowVIew;
 
-public class MainActivity extends AppCompatActivity implements ShowVIew{
+public class MainActivity extends AppCompatActivity implements ShowVIew {
 
 
     private RecyclerView recyclerView;
@@ -31,9 +31,8 @@ public class MainActivity extends AppCompatActivity implements ShowVIew{
         setContentView(R.layout.activity_main);
 
 
-
-      recyclerView = (RecyclerView) findViewById(R.id.recycler);
-      recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView = (RecyclerView) findViewById(R.id.recycler);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         showPresenter = new ShowPresenterSx(this);
         showPresenter.passData();
@@ -42,13 +41,12 @@ public class MainActivity extends AppCompatActivity implements ShowVIew{
     }
 
 
-
     @Override
     public void showData(Bean bean) {
 
 
         final List<Bean.DataBean> list = bean.getData();
-        Myadapter adapter = new Myadapter(list,MainActivity.this);
+        Myadapter adapter = new Myadapter(list, MainActivity.this);
         recyclerView.setAdapter(adapter);
 
 
@@ -63,19 +61,19 @@ public class MainActivity extends AppCompatActivity implements ShowVIew{
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent(MainActivity.this,ThreadActivity.class);
-                                intent.putExtra("vedio",list.get(position).getVedio_url());
+                                Intent intent = new Intent(MainActivity.this, ThreadActivity.class);
+                                intent.putExtra("vedio", list.get(position).getVedio_url());
                                 startActivity(intent);
                             }
                         })
-                        .setNegativeButton("取消",null)
+                        .setNegativeButton("取消", null)
                         .show();
 
             }
         });
 
         images = new ArrayList<>();
-        for (int i=0;i<list.size();i++){
+        for (int i = 0; i < list.size(); i++) {
             String image_url = list.get(i).getImage_url();
             images.add(image_url);
         }
