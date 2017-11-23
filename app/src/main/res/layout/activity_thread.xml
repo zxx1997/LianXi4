@@ -50,6 +50,15 @@
     <fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard
         android:id="@+id/play"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard>
+        android:layout_height="200dp"></fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard>
 
+    <Button
+        android:id="@+id/bt"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="kaisi"/>
+    <VideoView
+        android:id="@+id/video"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </LinearLayout>

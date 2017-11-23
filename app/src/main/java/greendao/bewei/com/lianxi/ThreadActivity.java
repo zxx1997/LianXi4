@@ -7,8 +7,10 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.MediaController;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
@@ -27,12 +29,29 @@ public class ThreadActivity extends FragmentActivity {
     private DownloadUtil mDownloadUtil;
 
     private JCVideoPlayerStandard play;
+    private VideoView videoView;
+    private Button bt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thread);
 
         play=findViewById(R.id.play);
+        videoView=findViewById(R.id.video);
+        bt=findViewById(R.id.bt);
+
+        videoView.setVideoPath(Environment.getExternalStorageDirectory()
+                .getAbsolutePath() + "/local"+"/adc.mp4");
+        MediaController mediaController=new MediaController(this);
+        videoView.setMediaController(mediaController);
+        mediaController.setAnchorView(videoView);
+        bt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                videoView.start();
+            }
+        });
+
         play.setUp(Environment.getExternalStorageDirectory()
                 .getAbsolutePath() + "/local"+"/adc.mp4",JCVideoPlayerStandard.SCREEN_LAYOUT_NORMAL,"视频标题");
 
